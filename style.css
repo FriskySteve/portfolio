@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Gothic&family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Gothic&family=League+Spartan:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --header-footer-background-color: #1f2041;
+  --body-background-color: #f9f9f9;
+  --gold-color: #d4af37;
+  --white-color: #fff;
+  --active-navbar-color: #adb6c4;
+}
+header {
+  background-color: var(--header-footer-background-color);
+  color: var(--white-color);
+  height: 500px;
+  width: 100%;
+  justify-self: flex-start;
+  align-self: flex-start;
+}
+#logo {
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 36px;
+}
+#gold {
+  color: var(--gold-color);
+}
+#logo-to-hide {
+  color: var(--active-navbar-color);
+}
+.active-navbar {
+  color: var(--active-navbar-color);
+}
+header h1 {
+  font-family: League Gothic;
+  font-weight: 400;
+  font-size: 96px;
+  color: var(--white-color);
+  justify-self: center;
+  margin: 0;
+}
+header h3 {
+  font-family: League Spartan;
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--white-color);
+  justify-self: center;
+  margin: 0;
+}
+header ul {
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 16px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+}
+#header {
+  padding: 37px 120px;
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  background-color: darkgreen;
+  text-align: center;
+}
+#title-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d4af37;
+}
+body {
+  background-color: var(--body-background-color);
+  /* height: 100%; */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer {
+  background-color: var(--header-footer-background-color);
+}
