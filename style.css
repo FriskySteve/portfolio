@@ -6,7 +6,7 @@
   --body-background-color: #f9f9f9;
   --gold-color: #d4af37;
   --white-color: #fff;
-  --active-navbar-color: #adb6c4;
+  --silver-color: #adb6c4;
 }
 header {
   background-color: var(--header-footer-background-color);
@@ -21,14 +21,17 @@ header {
   font-weight: 700;
   font-size: 36px;
 }
-#gold {
+.golden-logo {
   color: var(--gold-color);
 }
-#logo-to-hide {
-  color: var(--active-navbar-color);
+.silver-logo {
+  color: var(--silver-color);
+}
+.white-logo {
+  color: var(--white-color);
 }
 .active-navbar {
-  color: var(--active-navbar-color);
+  color: var(--silver-color);
 }
 header h1 {
   font-family: League Gothic;
@@ -50,7 +53,6 @@ header ul {
   font-family: Roboto;
   font-weight: 700;
   font-size: 16px;
-  list-style: none;
   display: flex;
   gap: 30px;
   align-items: center;
@@ -75,10 +77,17 @@ body {
   background-color: var(--body-background-color);
   /* height: 100%; */
   margin: 0;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
 footer {
   background-color: var(--header-footer-background-color);
+}
+.links {
+  list-style: none;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white-color);
 }
