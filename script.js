@@ -4,8 +4,21 @@ let active = "HOME";
 
 loadList(data.links, "header-links");
 loadLogo("header-logo", true);
-loadTitleAndP(data.headerTitle.about, "title-container");
+loadTitleAndP(data.headerTitle.home, "title-container");
+loadHome();
 loadFooter();
+
+function loadHome() {
+  loadImg(data.main.home.img, "main-container");
+  loadTitleAndP(data.main.home, "main-container");
+}
+
+function loadImg(img, destination) {
+  const $img = document.createElement("img");
+  const $destination = document.getElementById(destination);
+  $img.src = img;
+  $destination.appendChild($img);
+}
 
 function loadList(source, destination) {
   source.forEach((element) => {
@@ -46,14 +59,15 @@ function loadTitleAndP(source, destination) {
 
 function loadFooter() {
   loadList(data.links, "footer-links");
-
   const $email = document.createElement("p");
   const $phone = document.createElement("p");
+  const $div = document.createElement("div");
+  $div.id = "footer-logo";
   const $copyrights = document.getElementById("copyright");
   $email.textContent = data.footer.email;
   $phone.textContent = data.footer.phone;
-  $copyrights.append($email, $phone);
-  loadLogo("copyright", false);
+  $copyrights.append($email, $phone, $div);
+  loadLogo("footer-logo", false);
 }
 
 // const loadLinkList = () => {

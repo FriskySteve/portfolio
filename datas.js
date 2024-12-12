@@ -1,5 +1,5 @@
 const data = {
-  links: ["home", "projects", "about", "contact", "messages"],
+  links: ["HOME", "PROJECTS", "ABOUT", "CONTACT", "MESSAGES"],
   logo: {
     golden: "ITP",
     silver: "ortfolio",
@@ -7,7 +7,7 @@ const data = {
   },
   headerTitle: {
     home: {
-      title: "Jan Kowalski",
+      title: "JAN KOWALSKI",
       p: "WEB-DESIGNER",
     },
     projects: {
@@ -31,33 +31,69 @@ const data = {
     email: "jan_kowalski@gmail.com",
     phone: "+123 456 789",
   },
+  main: {
+    home: {
+      link: "HOME",
+      img: "img/male-desktop.png",
+      title: "About me",
+      p: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+    },
+    projects: {
+      btnSign: "img/plus.png",
+      btnText: "Add project",
+    },
+    about: {
+      background: {
+        title: "My background",
+        p: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla`,
+      },
+      hobbies: {
+        img: "img/male-desktop.png",
+        title: "My hobbies and interests",
+        p: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla`,
+        btnSign: "img/arrow-contact-me.png",
+        btnText: "Contact me",
+      },
+    },
+    contact: {
+      link: "CONTACT",
+      title: "CONTACT ME",
+      p: "SAY HELLO TO ME",
+    },
+    messages: {
+      link: "MESSAGES",
+      title: "MESSAGES",
+      p: "MESSAGE FROM THE INTERESTED PERSON",
+    },
+  },
 };
 
 // const datas = [
+//
 //   {
-//     link: "HOME",
-//     title: "JAN KOWALSKI",
-//     desc: "WEB-DESIGNER",
+//
 //   },
 //   {
-//     link: "PROJECTS",
-//     title: "MY PROJECTS",
-//     desc: "MADE WITH LOVE",
+//
 //   },
 //   {
-//     link: "ABOUT",
-//     title: "ABOUT ME",
-//     desc: "IT’S A-ME, JAN!",
+//
 //   },
 //   {
-//     link: "CONTACT",
-//     title: "CONTACT ME",
-//     desc: "SAY HELLO TO ME",
-//   },
-//   {
-//     link: "MESSAGES",
-//     title: "MESSAGES",
-//     desc: "MESSAGE FROM THE INTERESTED PERSON",
+//
 //   },
 // ];
 
