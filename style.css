@@ -85,8 +85,6 @@ footer {
   justify-content: center;
 }
 #footer-container {
-  /* max-width: 1920px;
-  width: 100%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -138,6 +136,12 @@ main p {
   flex-direction: column;
   max-width: 958px;
 }
+.home-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 311px;
+  margin-bottom: 25px;
+}
 #footer-logo {
   font-family: Roboto;
   font-size: 27px;
@@ -147,4 +151,9 @@ header > *,
 footer > * {
   max-width: 1920px;
   width: 100%;
+}
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }

@@ -1,23 +1,43 @@
 import { data, skills, background, hobbies } from "./datas.js";
 
 let active = "HOME";
+const mainContainer = document.getElementById("main-container");
 
 loadList(data.links, "header-links");
 loadLogo("header-logo", true);
 loadTitleAndP(data.headerTitle.home, "title-container");
 loadHome();
 loadFooter();
+loadAboutMe();
+
+function loadAboutMe() {
+  loadTitleAndPre(data.main.about.background, mainContainer);
+  loadTitleAndPre(data.main.about.hobbies, mainContainer);
+}
+
+function loadMessages() {
+  const messages = data.main.messages;
+  messages.forEach((message) => loadMessage(message, mainContainer));
+}
+
+function loadMessage(message, destination) {
+  const $message = document.createElement("pre");
+  $message.textContent = `Name: ${message.name}
+Email: ${message.email}
+Message: ${message.message}`;
+  destination.append($message);
+}
 
 function loadHome() {
-  loadImg(data.main.home.img, "main-container");
+  loadImg(data.main.home.img, mainContainer, "home-img");
   loadTitleAndP(data.main.home, "main-container");
 }
 
-function loadImg(img, destination) {
-  const $img = document.createElement("img");
-  const $destination = document.getElementById(destination);
-  $img.src = img;
-  $destination.appendChild($img);
+function loadImg(img, destination, cssClass) {
+  const $img = document.createElement("div");
+  $img.style.backgroundImage = `url("${img}")`;
+  $img.classList.add(cssClass);
+  destination.appendChild($img);
 }
 
 function loadList(source, destination) {
@@ -57,6 +77,17 @@ function loadTitleAndP(source, destination) {
   $destination.append($title, $p);
 }
 
+function loadTitleAndPre(source, destination) {
+  const $div = document.createElement("div");
+  const $title = document.createElement("h1");
+  const $p = document.createElement("pre");
+  const $destination = document.getElementById(destination);
+  $title.textContent = source.title;
+  $p.textContent = source.p;
+  $div.append($title, $p);
+  destination.appendChild($div);
+}
+
 function loadFooter() {
   loadList(data.links, "footer-links");
   const $email = document.createElement("p");
@@ -69,84 +100,3 @@ function loadFooter() {
   $copyrights.append($email, $phone, $div);
   loadLogo("footer-logo", false);
 }
-
-// const loadLinkList = () => {
-//   const $ulLinks = document.querySelectorAll(".links");
-//   datas.forEach((data) => {
-//     const link = document.createElement("li");
-//     link.textContent = data.link;
-//     $ulLinks.forEach(($ul) => {
-//       $ul.appendChild(link.cloneNode(true));
-//     });
-//   });
-// };
-
-// function loadTitle() {
-//   const titleContainer = document.getElementById("title-container");
-//   const title = document.createElement("h1");
-//   title.textContent = datas[0].title;
-//   const desc = document.createElement("h2");
-//   desc.textContent = datas[0].desc;
-//   titleContainer.append(title, desc);
-// }
-
-// loadLinkList();
-// loadTitle();
-
-// switch (active) {
-//   case "home":
-//     home();
-//     break;
-//   case "projects":
-//     projects();
-//     break;
-//   case "about":
-//     about();
-//     break;
-//   case "contact":
-//     contact();
-//     break;
-//   case "messages":
-//     messages();
-//     break;
-
-//   default:
-//     home();
-//     break;
-// }
-
-// function home() {
-//   articleCreator();
-// }
-// function projects() {}
-// function about() {}
-// function contact() {}
-// function messages() {}
-// function skillCreator() {
-//   const title = document.createElement("h4");
-//   const skillsHolder = document.createElement("div");
-//   title.textContent = "My Skills";
-//   skills.forEach((skill) => {
-//     const skillHolder = document.createElement("div");
-//     const img = document.createElement("img");
-//     const skillName = document.createElement("h4");
-//     const ul = document.createElement("ul");
-//     const exp = document.createElement("p");
-//     img.src = skill.img;
-//     skillName.textContent = skill.name;
-//     exp.textContent = skill.exp;
-//     skillHolder.append(img, skillName, ul, exp);
-//     skillsHolder.appendChild(skillHolder);
-//   });
-// }
-
-// function articleCreator(title, text, destination) {
-//   const title = document.createElement("h2");
-//   title.textContent = title;
-//   destination.append(title);
-//   text.forEach((paragrah) => {
-//     const param = document.createElement("p");
-//     param.textContent = paragrah;
-//     destination.append(param);
-//   });
-// }
