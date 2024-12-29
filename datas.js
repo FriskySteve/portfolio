@@ -56,10 +56,24 @@ const data = {
       title: "About me",
       p: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
     },
-    projects: {
-      btnSign: "img/plus.png",
-      btnText: "Add project",
-    },
+    projects: [
+      {
+        title: "Calculator1",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator2",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator3",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator4",
+        technologies: ["html", "java script"],
+      },
+    ],
     about: {
       background: {
         title: "My background",
@@ -88,22 +102,6 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     },
   },
 };
-
-// const datas = [
-//
-//   {
-//
-//   },
-//   {
-//
-//   },
-//   {
-//
-//   },
-//   {
-//
-//   },
-// ];
 
 const skills = [
   { name: "HTML", img: "img/html.png" },
