@@ -51,10 +51,48 @@ const data = {
       },
     ],
     home: {
-      link: "HOME",
       img: "img/male-desktop.png",
       title: "About me",
       p: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+      title2: "My Skills",
+      skills: [
+        { name: "HTML", img: "img/html.png", exp: 1 },
+        {
+          name: "CSS",
+          img: "img/css.png",
+          exp: 2,
+        },
+        {
+          name: "JavaScript",
+          img: "img/js.png",
+          exp: 3,
+        },
+        {
+          name: "Git",
+          img: "img/git.png",
+          exp: 4,
+        },
+        {
+          name: "Figma",
+          img: "img/figma.png",
+          exp: 3,
+        },
+        {
+          name: "Chrome",
+          img: "img/chrome/png",
+          exp: 5,
+        },
+        {
+          name: "VSCode",
+          img: "img/vsc.png",
+          exp: 2,
+        },
+        {
+          name: "GitHub",
+          img: "img/github.png",
+          exp: 1,
+        },
+      ],
     },
     projects: [
       {
@@ -71,6 +109,18 @@ const data = {
       },
       {
         title: "Calculator4",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator5",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator6",
+        technologies: ["html", "java script"],
+      },
+      {
+        title: "Calculator7",
         technologies: ["html", "java script"],
       },
     ],
@@ -103,44 +153,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
   },
 };
 
-const skills = [
-  { name: "HTML", img: "img/html.png" },
-  {
-    name: "CSS",
-    img: "img/css.png",
-    exp: "3 years",
-  },
-  {
-    name: "JavaScript",
-    img: "img/js.png",
-    exp: "3 years",
-  },
-  {
-    name: "Git",
-    img: "img/git.png",
-    exp: "3 years",
-  },
-  {
-    name: "Figma",
-    img: "img/figma.png",
-    exp: "3 years",
-  },
-  {
-    name: "Chrome",
-    img: "img/chrome/png",
-    exp: "3 years",
-  },
-  {
-    name: "VSCode",
-    img: "img/vsc.png",
-    exp: "3 years",
-  },
-  {
-    name: "GitHub",
-    img: "img/github.png",
-    exp: "3 years",
-  },
-];
+// const s;
 
 const background = [
   "My background",
@@ -163,4 +176,4 @@ const hobbies = [
   ],
 ];
 
-export { data, skills, background, hobbies };
+export { data, background, hobbies };
