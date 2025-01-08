@@ -1,7 +1,7 @@
 import { data } from "./datas.js";
 
 let active = "HOME";
-const mainContainer = document.getElementById("main-container");
+const mainContainer = document.querySelector("main");
 const header = document.querySelector("header");
 const main = document.querySelector("main");
 const footer = document.querySelector("footer");
@@ -104,13 +104,19 @@ function loadModal() {
 }
 
 function removeBlur() {
-  mainContainer.classList.remove("overlay");
+  const projectsDiv = document.getElementById("projects");
+  const body = document.querySelector("body");
+  body.classList.remove("no-scroll");
+  projectsDiv.classList.remove("overlay");
   header.classList.remove("overlay");
   footer.classList.remove("overlay");
 }
 
 function addBlur() {
-  mainContainer.classList.add("overlay");
+  const projectsDiv = document.getElementById("projects");
+  const body = document.querySelector("body");
+  body.classList.add("no-scroll");
+  projectsDiv.classList.add("overlay");
   header.classList.add("overlay");
   footer.classList.add("overlay");
 }
@@ -127,7 +133,6 @@ function loadModalForm() {
   titleInput.type = "text";
   titleInput.name = "project title";
   titleInput.placeholder = "Project title";
-  // titleInput.required = true;
   titleDiv.append(titleLabel, titleInput);
 
   const technologiesDiv = document.createElement("div");
@@ -137,7 +142,6 @@ function loadModalForm() {
   technologiesInput.type = "text";
   technologiesInput.name = "techonologies";
   technologiesInput.placeholder = "html, css, javascript";
-  // technologiesInput.required = true;
   technologiesDiv.append(technologiesLabel, technologiesInput);
 
   const addProjectBtn = document.createElement("button");
@@ -250,7 +254,11 @@ function loadProjects() {
     data.main.projects.forEach((project) => {
       loadProject(project, projectsContainer, true);
     });
-  } else projectsContainer.textContent = "There are no projects to display";
+  } else {
+    const noProjects = document.createElement("h1");
+    noProjects.textContent = "There are no projects to display";
+    projectsContainer.appendChild(noProjects);
+  }
   projects.append(addProjectBtn, projectsContainer);
   mainContainer.appendChild(projects);
 }
@@ -345,8 +353,8 @@ function loadContactMe() {
   emailDiv.append(emailLabel, emailInput);
   nameEmailDiv.append(nameDiv, emailDiv);
   messageDiv.append(msgLabel, msgInput);
-  form.append(nameEmailDiv, messageDiv, submitButton);
-  formContainer.append(formTitle, form);
+  form.append(formTitle, nameEmailDiv, messageDiv, submitButton);
+  formContainer.appendChild(form);
   mainContainer.appendChild(formContainer);
 
   form.addEventListener("submit", (event) => {
@@ -508,11 +516,16 @@ function loadHome() {
   const mySkillsHeader = document.createElement("h1");
   mySkillsHeader.textContent = data.main.home.title2;
   const mySkills = document.createElement("div");
+  const homeDescContainer = document.createElement("div");
+  const carousel = loadCarousel();
 
-  homeContainer.append(imgDiv, aboutMe, aboutMeP, mySkillsHeader, mySkills);
+  homeDescContainer.append(aboutMe, aboutMeP, mySkillsHeader);
+  homeContainer.append(imgDiv, homeDescContainer, mySkills);
   mainContainer.appendChild(homeContainer);
   loadSkills(homeContainer);
-  loadCarousel();
+  // if (data.main.projects.length > 0) {
+  //   loadCarousel();
+  // }
 }
 
 function loadCarousel() {
@@ -528,7 +541,7 @@ function loadCarousel() {
     }
     loadProject(data.main.projects.at(i), carouselContainer, false);
   }
-  mainContainer.appendChild(carouselContainer);
+  // mainContainer.appendChild(carouselContainer);
   if (data.main.projects.length > 3) {
     const carouselButtonsContainer = document.createElement("div");
     carouselButtonsContainer.id = "carousel-buttons-container";
@@ -559,6 +572,7 @@ function loadCarousel() {
       loadCarousel();
     });
   }
+  return carouselContainer;
 }
 
 function loadLinks() {

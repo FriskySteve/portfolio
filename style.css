@@ -19,6 +19,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: content-box;
 }
 #header-container {
   max-width: 1920px;
@@ -86,6 +87,7 @@ footer {
   padding: 60px 120px;
   display: flex;
   justify-content: center;
+  box-sizing: content-box;
 }
 #footer-container {
   display: flex;
@@ -172,11 +174,14 @@ pre {
   font-weight: 700;
 }
 .projects-ul {
+  display: flex;
+  flex-direction: column;
   color: var(--white-color);
   font-family: Roboto;
   font-size: 20px;
   font-weight: 400;
   position: absolute;
+  gap: 40px;
   top: 81px;
   left: 30px;
   z-index: 1;
@@ -185,17 +190,19 @@ pre {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 41px;
+  row-gap: 84px;
+  column-gap: 41px;
+  /* gap: 41px; */
   align-self: center;
-  justify-self: center;
 }
 #projects {
-  margin-left: 139px;
-  margin-right: 139px;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  box-sizing: border-box;
+  margin: 84px 10px;
+  max-width: 1200px;
 }
 #add-project-btn {
   background-color: var(--silver-color);
@@ -257,12 +264,15 @@ pre {
   height: 311px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url(img/male-desktop.png);
+  border-radius: 16px;
 }
 #about-me-container {
   max-width: 958px;
   display: flex;
   gap: 65px;
   flex-direction: column;
+  margin: 84px 0;
 }
 .h1-pre {
   margin-top: 0;
@@ -274,8 +284,8 @@ pre {
 #messages-contener {
   display: flex;
   flex-direction: column;
+  margin: 65px 120px;
   gap: 65px;
-  max-width: 958px;
 }
 #messages-contener * {
   color: var(--header-footer-background-color);
@@ -286,39 +296,31 @@ pre {
 #contact-form {
   display: flex;
   flex-direction: column;
+  margin: 65px 120px;
+  gap: 65px;
+}
+#contact-form h1 {
   margin: 0;
-  padding: 0;
-  width: 100%;
 }
 #name-email-div {
   display: flex;
-  gap: 65px;
-  justify-content: space-between;
-  width: 100%;
+  gap: 110px;
 }
 #form-container {
   display: flex;
   flex-direction: column;
-  margin-left: 120px;
-  margin-right: 120px;
-  width: 100%;
-  align-self: center;
-  justify-self: center;
-}
-#form-container h1 {
-  margin: 0;
-  margin-bottom: 65px;
+  width: clamp(320px, 100%, 1920px);
 }
 #form-container input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  margin-top: 27px;
+  border: none;
+  border-bottom: 2px solid var(--header-footer-background-color);
+  width: 100%;
 }
 #name-div,
-#email-div,
-#message-div {
-  display: flex;
-  flex-direction: column;
+#email-div {
+  /* display: flex;
+  flex-direction: column; */
   width: 100%;
 }
 #message-div {
@@ -333,8 +335,11 @@ main label {
   margin-bottom: 27px;
 }
 .overlay {
-  pointer-events: none; /* Blokuje interakcje z tłem */
-  filter: blur(12px); /* Wyblura tło */
+  pointer-events: none;
+  filter: blur(12px);
+}
+.no-scroll {
+  overflow: hidden;
 }
 .modal {
   position: fixed;
