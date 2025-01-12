@@ -5,7 +5,8 @@ const header = document.querySelector("header");
 const main = document.querySelector("main");
 const footer = document.querySelector("footer");
 const title = "title-container";
-const emailPattern = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 let startCarouselAt = 0;
 let active = "HOME";
 
@@ -473,7 +474,13 @@ function loadContactMe() {
       checkForErrors(msgInput.id);
     });
 
-    if (name < 3 || name > 20 || !email || msg < 1 || msg > 100) {
+    if (
+      name < 3 ||
+      name > 20 ||
+      !emailPattern.test(emailInput.value) ||
+      msg < 1 ||
+      msg > 100
+    ) {
       if (name < 3 || name > 20) {
         addError(nameInput.id);
       }
