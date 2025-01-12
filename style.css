@@ -39,7 +39,7 @@ header {
   font-size: 36px;
 }
 #logo-and-navbar {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: 700;
   display: flex;
   justify-content: space-between;
@@ -61,7 +61,7 @@ header {
   color: var(--silver-color);
 }
 header h1 {
-  font-family: League Gothic;
+  font-family: "LeagueGothic";
   font-weight: 400;
   font-size: 96px;
   color: var(--white-color);
@@ -70,7 +70,7 @@ header h1 {
   text-align: center;
 }
 header p {
-  font-family: League Spartan;
+  font-family: "LeagueSpartan";
   font-weight: 400;
   font-size: 32px;
   color: var(--white-color);
@@ -113,7 +113,7 @@ footer {
 }
 footer ul,
 footer p {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 700;
   color: var(--white-color);
@@ -135,13 +135,13 @@ main {
   position: relative;
 }
 main h1 {
-  font-family: League Spartan;
+  font-family: "LeagueSpartan";
   font-size: 32px;
   font-weight: 700;
   color: var(--header-footer-background-color);
 }
 main p {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 400;
   color: var(--header-footer-background-color);
@@ -159,7 +159,7 @@ main p {
   margin-bottom: 25px;
 }
 #footer-logo {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 27px;
   font-weight: 700;
 }
@@ -174,13 +174,13 @@ pre {
   overflow-wrap: break-word;
   margin: 0;
   color: var(--header-footer-background-color);
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 400;
 }
 .projects-header {
   color: var(--white-color);
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 20px;
   font-weight: 700;
 }
@@ -188,7 +188,7 @@ pre {
   display: flex;
   flex-direction: column;
   color: var(--white-color);
-  font-family: Roboto;
+  font-family: "Roboto";
   font-size: 20px;
   font-weight: 400;
   position: absolute;
@@ -283,8 +283,7 @@ pre {
   display: flex;
   gap: 65px;
   flex-direction: column;
-  margin: 84px 0;
-  padding: 0 10px;
+  margin: 84px 16;
 }
 .h1-pre {
   margin-top: 0;
@@ -301,7 +300,7 @@ pre {
 }
 #messages-contener * {
   color: var(--header-footer-background-color);
-  font-family: League Spartan;
+  font-family: "LeagueSpartan";
   font-size: 16px;
   font-weight: 700;
 }
@@ -339,7 +338,7 @@ pre {
 }
 main label {
   color: var(--header-footer-background-color);
-  font-family: League Spartan;
+  font-family: "LeagueSpartan";
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 27px;
@@ -397,10 +396,13 @@ main label {
 }
 #home-container {
   max-width: 958px;
-  padding-left: 102px;
-  padding-right: 102px;
+  padding: 84px 102px 0 102px;
   display: flex;
   flex-direction: column;
+}
+#home-container h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .carousel-buttons {
   display: flex;
@@ -473,7 +475,7 @@ main label {
   color: var(--silver-color);
 }
 input::placeholder {
-  font-family: Roboto;
+  font-family: "Roboto";
   color: var(--input-place-holder-color);
   font-size: 16px;
 }
@@ -483,7 +485,7 @@ input::placeholder {
 .project-page {
   background-image: url("img/project-background.png");
   height: 460px;
-  width: 360px;
+  width: clamp(300px, 10vw, 360px);
   border-radius: 16px;
   position: relative;
 }
@@ -521,7 +523,9 @@ input::placeholder {
     display: none;
   }
   #home-container {
-    padding: 0 16px;
+    padding-top: 84px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
   .modal {
     padding: 40px 0;
@@ -540,5 +544,8 @@ input::placeholder {
   }
   .carousel-buttons {
     transform: rotate(90deg);
+  }
+  #name-email-div {
+    flex-direction: column;
   }
 }
