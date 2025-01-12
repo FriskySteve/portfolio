@@ -480,6 +480,13 @@ input::placeholder {
 #hamburger-container {
   display: none;
 }
+.project-page {
+  background-image: url("img/project-background.png");
+  height: 460px;
+  width: 360px;
+  border-radius: 16px;
+  position: relative;
+}
 @media (width<768px) {
   #hamburger-container {
     display: block;

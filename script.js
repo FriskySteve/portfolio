@@ -1,12 +1,13 @@
 import { data } from "./datas.js";
 
-let active = "HOME";
 const mainContainer = document.querySelector("main");
 const header = document.querySelector("header");
 const main = document.querySelector("main");
 const footer = document.querySelector("footer");
 const title = "title-container";
+const emailPattern = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
 let startCarouselAt = 0;
+let active = "HOME";
 
 initialLoad();
 
@@ -50,6 +51,7 @@ function loadPage() {
 function loadSkills(destination) {
   const skills = data.main.home.skills;
   const skillsContainer = document.createElement("div");
+
   skillsContainer.id = "skills-container";
   skills.forEach((skill) => {
     loadSkill(skill, skillsContainer);
@@ -67,13 +69,17 @@ function loadSkill(skill, skillsContainer) {
   const skillName = document.createElement("p");
   const skillExp = document.createElement("p");
   const ballsContainer = document.createElement("div");
+
   ballsContainer.classList.add("balls-container");
+
   for (let i = 0; i < 5; i++) {
     const newBall = document.createElement("div");
+
     newBall.classList.add("ball");
     if (i < exp) newBall.classList.add("full-ball");
     ballsContainer.appendChild(newBall);
   }
+
   skillContainer.classList.add("skill-container");
   skillImgContainer.classList.add("skill-img-container");
   skillDescContainer.classList.add("skill-desc-container");
@@ -93,7 +99,9 @@ function clear() {
   document.querySelectorAll(".active").forEach((element) => {
     element.classList.remove("active");
   });
+
   const titleContainer = document.getElementById(title);
+
   titleContainer.innerHTML = "";
   mainContainer.innerHTML = "";
 }
@@ -106,6 +114,7 @@ function loadModal() {
 function removeBlur() {
   const projectsDiv = document.getElementById("projects");
   const body = document.querySelector("body");
+
   body.classList.remove("no-scroll");
   projectsDiv.classList.remove("overlay");
   header.classList.remove("overlay");
@@ -115,6 +124,7 @@ function removeBlur() {
 function addBlur() {
   const projectsDiv = document.getElementById("projects");
   const body = document.querySelector("body");
+
   body.classList.add("no-scroll");
   projectsDiv.classList.add("overlay");
   header.classList.add("overlay");
@@ -123,47 +133,43 @@ function addBlur() {
 
 function loadModalForm() {
   const modal = document.createElement("div");
-  modal.className = "modal";
   const modalForm = document.createElement("form");
-
   const titleDiv = document.createElement("div");
   const titleLabel = document.createElement("label");
-  titleLabel.textContent = "Project title";
   const titleInput = document.createElement("input");
+  const technologiesDiv = document.createElement("div");
+  const technologiesLabel = document.createElement("label");
+  const technologiesInput = document.createElement("input");
+  const addProjectBtn = document.createElement("button");
+  const buttonText = document.createElement("p");
+  const buttonImg = document.createElement("img");
+  const closeModal = document.createElement("button");
+  const closeModalImg = document.createElement("img");
+
+  titleLabel.textContent = "Project title";
+  modal.className = "modal";
   titleInput.type = "text";
   titleInput.id = "title";
   titleInput.name = "project title";
   titleInput.placeholder = "Project title";
   titleDiv.append(titleLabel, titleInput);
-
-  const technologiesDiv = document.createElement("div");
-  const technologiesLabel = document.createElement("label");
   technologiesLabel.textContent = "Technologies";
-  const technologiesInput = document.createElement("input");
   technologiesInput.type = "text";
   technologiesInput.id = "techonologies";
   technologiesInput.name = "techonologies";
   technologiesInput.placeholder = "html, css, javascript";
   technologiesDiv.append(technologiesLabel, technologiesInput);
-
-  const addProjectBtn = document.createElement("button");
   addProjectBtn.classList = "buttons";
   addProjectBtn.type = "submit";
-  const buttonImg = document.createElement("img");
   buttonImg.src = "img/plus.png";
   buttonImg.classList = "center";
-  const buttonText = document.createElement("p");
   buttonText.classList = "center";
   buttonText.textContent = "Add project";
   addProjectBtn.append(buttonImg, buttonText);
-
-  const closeModal = document.createElement("button");
-  const closeModalImg = document.createElement("img");
   closeModalImg.src = "img/close.png";
   closeModalImg.classList = "center";
   closeModal.appendChild(closeModalImg);
   closeModal.id = "close-modal";
-
   modalForm.append(titleDiv, technologiesDiv, addProjectBtn);
   modal.append(closeModal, modalForm);
   main.appendChild(modal);
@@ -176,6 +182,7 @@ function loadModalForm() {
     const technologies = technologiesInput.value;
     const technologiesLength = technologies.length;
     const technologiesList = technologies.split(",");
+
     titleInput.addEventListener("input", () => {
       checkForErrors(titleInput.id);
     });
@@ -195,8 +202,8 @@ function loadModalForm() {
         title: title,
         technologies: technologiesList,
       };
-      data.main.projects.push(newProject);
 
+      data.main.projects.push(newProject);
       modal.remove();
       removeBlur();
       mainContainer.innerHTML = "";
@@ -212,16 +219,17 @@ function loadModalForm() {
 
 function loadProjects() {
   const projects = document.createElement("div");
-  projects.id = "projects";
   const projectsContainer = document.createElement("div");
-  projectsContainer.id = "projects-container";
   const addProjectBtn = document.createElement("button");
+  const buttonImg = document.createElement("img");
+  const buttonText = document.createElement("p");
+
+  projects.id = "projects";
+  projectsContainer.id = "projects-container";
   addProjectBtn.classList = "buttons";
   addProjectBtn.style.marginBottom = "84px";
-  const buttonImg = document.createElement("img");
   buttonImg.src = "img/plus.png";
   buttonImg.classList = "center";
-  const buttonText = document.createElement("p");
   buttonText.classList = "center";
   buttonText.textContent = "Add project";
   addProjectBtn.append(buttonImg, buttonText);
@@ -234,38 +242,41 @@ function loadProjects() {
     });
   } else {
     const noProjects = document.createElement("h1");
+
     noProjects.textContent = "There are no projects to display";
     projectsContainer.appendChild(noProjects);
   }
+
   projects.append(addProjectBtn, projectsContainer);
   mainContainer.appendChild(projects);
 }
 
 function loadProject(project, container, button) {
-  const div = document.createElement("div");
-  div.style.backgroundImage = 'url("img/project-background.png")';
-  div.style.height = "460px";
-  div.style.width = "360px";
-  div.style.borderRadius = "16px";
-  div.style.position = "relative";
   const header = document.createElement("h2");
+  const ul = document.createElement("ul");
+  const div = document.createElement("div");
+
+  div.classList.add("project-page");
   header.classList = "projects-header";
   header.textContent = project.title;
-  const ul = document.createElement("ul");
   ul.classList = "projects-ul";
+
   project.technologies.forEach((technology) => {
     const li = document.createElement("li");
     li.textContent = technology.toUpperCase();
     li.style.fontSize = "16px";
     ul.appendChild(li);
   });
+
   if (button) {
+    const deleteButton = document.createElement("button");
     const buttonImg = document.createElement("img");
+
     buttonImg.src = "img/delete.png";
     buttonImg.alt = "delete";
-    const deleteButton = document.createElement("button");
-    deleteButton.classList = "delete-button";
+    deleteButton.classList.add("delete-button");
     deleteButton.appendChild(buttonImg);
+
     deleteButton.addEventListener("click", () => {
       data.main.projects = data.main.projects.filter(
         (element) => element != project
@@ -274,6 +285,7 @@ function loadProject(project, container, button) {
       mainContainer.innerHTML = "";
       loadProjects();
     });
+
     div.append(header, ul, deleteButton);
   } else div.append(header, ul);
 
@@ -285,8 +297,8 @@ function checkForErrors(inputId) {
   const inputLength = input.value.length;
   const inputDiv = input.parentNode;
   const error = document.createElement("p");
-  const emailPattern = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
   let isError = inputDiv.querySelector(".error");
+
   error.classList.add("error");
   input.style.borderColor = "#AF0808";
 
@@ -367,6 +379,7 @@ function addError(inputId) {
   const inputLength = input.value.length;
   const inputDiv = input.parentNode;
   const error = document.createElement("p");
+
   error.classList.add("error");
   input.style.borderColor = "#AF0808";
 
@@ -404,48 +417,49 @@ function addError(inputId) {
 }
 
 function loadContactMe() {
-  mainContainer.innerHTML = "";
   const formContainer = document.createElement("div");
-  formContainer.id = "form-container";
   const formTitle = document.createElement("h1");
-  formTitle.textContent = "Contact Me";
   const nameDiv = document.createElement("div");
-  nameDiv.id = "name-div";
   const emailDiv = document.createElement("div");
-  emailDiv.id = "email-div";
   const messageDiv = document.createElement("div");
-  messageDiv.id = "message-div";
   const form = document.createElement("form");
-  form.id = "contact-form";
   const nameLabel = document.createElement("label");
-  nameLabel.textContent = "Name";
   const nameInput = document.createElement("input");
+  const emailLabel = document.createElement("label");
+  const emailInput = document.createElement("input");
+  const msgLabel = document.createElement("label");
+  const msgInput = document.createElement("input");
+  const submitButton = document.createElement("button");
+  const buttonText = document.createElement("p");
+  const nameEmailDiv = document.createElement("div");
+
+  mainContainer.innerHTML = "";
+  formContainer.id = "form-container";
+  formTitle.textContent = "Contact Me";
+  nameDiv.id = "name-div";
+  emailDiv.id = "email-div";
+  messageDiv.id = "message-div";
+  form.id = "contact-form";
+  nameLabel.textContent = "Name";
   nameInput.type = "text";
   nameInput.id = "name";
   nameInput.name = "name";
   nameInput.placeholder = "Your name";
-  const emailLabel = document.createElement("label");
   emailLabel.textContent = "Email";
-  const emailInput = document.createElement("input");
   emailInput.type = "email";
   emailInput.id = "email";
   emailInput.name = "email";
   emailInput.placeholder = "email@example.com";
-  const msgLabel = document.createElement("label");
   msgLabel.textContent = "Message";
-  const msgInput = document.createElement("input");
   msgInput.type = "text";
   msgInput.id = "message";
   msgInput.name = "message";
   msgInput.placeholder = "Hello, my name is . . .";
-  const submitButton = document.createElement("button");
   submitButton.classList = "buttons";
   submitButton.type = "submit";
-  const buttonText = document.createElement("p");
   buttonText.classList = "center";
   buttonText.textContent = "Send message";
   submitButton.appendChild(buttonText);
-  const nameEmailDiv = document.createElement("div");
   nameEmailDiv.id = "name-email-div";
   nameDiv.append(nameLabel, nameInput);
   emailDiv.append(emailLabel, emailInput);
@@ -456,11 +470,11 @@ function loadContactMe() {
   mainContainer.appendChild(formContainer);
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const emailPattern = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
     const name = nameInput.value.length;
     const email = emailPattern.test(emailInput.value);
     const msg = msgInput.value.length;
+
+    event.preventDefault();
     nameInput.addEventListener("input", () => {
       checkForErrors(nameInput.id);
     });
@@ -499,15 +513,17 @@ function loadContactMe() {
   });
 }
 function resetInputState(inputElement, errorContainer) {
+  const errorMessages = errorContainer.querySelectorAll(".error");
+
   inputElement.style.borderColor = "";
-  const errorMessages = errorContainer.querySelectorAll(`.error`);
   errorMessages.forEach((error) => error.remove());
 }
 
 function loadAboutMe() {
   const aboutMeContainer = document.createElement("div");
-  aboutMeContainer.id = "about-me-container";
   const imgDiv = document.createElement("div");
+
+  aboutMeContainer.id = "about-me-container";
   imgDiv.style.backgroundImage = 'url("img/male-desktop.png")';
   imgDiv.classList = "male-background";
   aboutMeContainer.appendChild(imgDiv);
@@ -516,12 +532,13 @@ function loadAboutMe() {
   loadTitleAndPre(data.main.about.hobbies, aboutMeContainer);
 
   const addContactMeBtn = document.createElement("button");
+  const buttonImg = document.createElement("img");
+  const buttonText = document.createElement("p");
+
   addContactMeBtn.id = "contacte-me-button";
   addContactMeBtn.classList = "buttons";
-  const buttonImg = document.createElement("img");
   buttonImg.src = "img/arrow-contact-me.png";
   buttonImg.classList = "center";
-  const buttonText = document.createElement("p");
   buttonText.classList = "center";
   buttonText.textContent = "Contact me";
   addContactMeBtn.append(buttonImg, buttonText);
@@ -545,41 +562,46 @@ function loadAboutMe() {
 
 function loadMessages() {
   const messagesContener = document.createElement("div");
-  messagesContener.id = "messages-contener";
   const messages = data.main.messages;
+
+  messagesContener.id = "messages-contener";
   messages.forEach((message) => loadMessage(message, messagesContener));
   mainContainer.appendChild(messagesContener);
 }
 
 function loadMessage(message, destination) {
   const $message = document.createElement("pre");
+
   $message.textContent = `Name: ${message.name}
-Email: ${message.email}
-Message: ${message.message}`;
+  Email: ${message.email}
+  Message: ${message.message}`;
   destination.append($message);
 }
 
 function loadHome() {
   const homeContainer = document.createElement("div");
-  homeContainer.id = "home-container";
   const imgDiv = document.createElement("div");
-  imgDiv.style.backgroundImage = 'url("img/male-desktop.png")';
-  imgDiv.classList = "male-background";
   const aboutMe = document.createElement("h1");
-  aboutMe.textContent = data.main.home.title;
   const aboutMeP = document.createElement("p");
-  aboutMeP.textContent = data.main.home.p;
   const mySkillsHeader = document.createElement("h1");
-  mySkillsHeader.textContent = data.main.home.title2;
   const mySkills = document.createElement("div");
   const homeDescContainer = document.createElement("div");
   const hamburgerMenu = document.getElementById("hamburger-container");
   const hamburgerLinks = document.getElementById("header-links");
   const hamburgerIcon = document.getElementById("hamburger-icon");
+
+  homeContainer.id = "home-container";
+  imgDiv.style.backgroundImage = 'url("img/male-desktop.png")';
+  imgDiv.classList = "male-background";
+  aboutMe.textContent = data.main.home.title;
+  aboutMeP.textContent = data.main.home.p;
+  mySkillsHeader.textContent = data.main.home.title2;
   homeDescContainer.append(aboutMe, aboutMeP, mySkillsHeader);
   homeContainer.append(imgDiv, homeDescContainer, mySkills);
   mainContainer.appendChild(homeContainer);
+
   loadSkills(homeContainer);
+
   if (data.main.projects.length > 0) {
     loadCarousel();
   }
@@ -596,6 +618,7 @@ function loadHome() {
 
 function loadCarousel() {
   const carouselContainer = document.createElement("div");
+
   carouselContainer.id = "carousel-container";
   for (let i = startCarouselAt; i < startCarouselAt + 3; i++) {
     if (i === data.main.projects.length - 1) {
@@ -610,15 +633,16 @@ function loadCarousel() {
   mainContainer.appendChild(carouselContainer);
   if (data.main.projects.length > 3) {
     const carouselButtonsContainer = document.createElement("div");
-    carouselButtonsContainer.id = "carousel-buttons-container";
     const carouselButtonLeft = document.createElement("button");
-    carouselButtonLeft.classList.add("carousel-buttons");
     const carouselButtonRight = document.createElement("button");
-    carouselButtonRight.classList.add("carousel-buttons");
     const buttonLeftImg = document.createElement("img");
+    const buttonRightImg = document.createElement("img");
+
+    carouselButtonsContainer.id = "carousel-buttons-container";
+    carouselButtonLeft.classList.add("carousel-buttons");
+    carouselButtonRight.classList.add("carousel-buttons");
     buttonLeftImg.src = "img/carousel-left.png";
     buttonLeftImg.classList = "center";
-    const buttonRightImg = document.createElement("img");
     buttonRightImg.src = "img/carousel-right.png";
     buttonRightImg.classList = "center";
     carouselButtonLeft.appendChild(buttonLeftImg);
@@ -645,8 +669,10 @@ function loadLinks() {
   const headerUl = document.getElementById("header-links");
   const footerUl = document.getElementById("footer-links");
   const links = data.links;
+
   links.forEach((link) => {
     const headerLi = document.createElement("li");
+
     headerLi.textContent = link;
     headerLi.addEventListener("click", () => {
       clear();
@@ -656,6 +682,7 @@ function loadLinks() {
       loadPage();
     });
     const footerLi = document.createElement("li");
+
     footerLi.textContent = link;
     footerLi.addEventListener("click", () => {
       clear();
@@ -676,6 +703,7 @@ function loadLogo(destination, header) {
   const goldenLogo = document.createElement("span");
   const silverLogo = document.createElement("span");
   const whiteLogo = document.createElement("span");
+
   goldenLogo.textContent = data.logo.golden;
   goldenLogo.classList.add("golden-logo");
   silverLogo.textContent = data.logo.silver;
@@ -683,6 +711,7 @@ function loadLogo(destination, header) {
   whiteLogo.textContent = data.logo.copyright;
   whiteLogo.classList.add("white-logo");
   $destination.append(goldenLogo, silverLogo);
+
   if (header) {
     silverLogo.id = "logo-to-hide";
   } else {
@@ -694,6 +723,7 @@ function loadTitleAndP(source, destination) {
   const $title = document.createElement("h1");
   const $p = document.createElement("p");
   const $destination = document.getElementById(destination);
+
   $title.textContent = source.title.toUpperCase();
   $p.textContent = source.p;
   $destination.append($title, $p);
@@ -702,10 +732,11 @@ function loadTitleAndP(source, destination) {
 function loadTitleAndPre(source, destination) {
   const $div = document.createElement("div");
   const $title = document.createElement("h1");
-  $title.classList = "h1-pre";
   const $p = document.createElement("pre");
-  $p.classList = "pre";
   const $destination = document.getElementById(destination);
+
+  $title.classList = "h1-pre";
+  $p.classList = "pre";
   $title.textContent = source.title;
   $p.textContent = source.p;
   $div.append($title, $p);
@@ -716,8 +747,9 @@ function loadFooter() {
   const $email = document.createElement("p");
   const $phone = document.createElement("p");
   const $div = document.createElement("div");
-  $div.id = "footer-logo";
   const $copyrights = document.getElementById("copyright");
+
+  $div.id = "footer-logo";
   $email.textContent = data.footer.email;
   $phone.textContent = data.footer.phone;
   $copyrights.append($email, $phone, $div);
