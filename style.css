@@ -16,6 +16,7 @@
   --gold-color: #d4af37;
   --white-color: #fff;
   --silver-color: #adb6c4;
+  --input-place-holder-color: #7e7e7e;
 }
 * {
   box-sizing: border-box;
@@ -470,6 +471,11 @@ main label {
 }
 .skill-exp {
   color: var(--silver-color);
+}
+input::placeholder {
+  font-family: Roboto;
+  color: var(--input-place-holder-color);
+  font-size: 16px;
 }
 #hamburger-container {
   display: none;

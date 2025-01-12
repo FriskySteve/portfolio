@@ -131,6 +131,7 @@ function loadModalForm() {
   titleLabel.textContent = "Project title";
   const titleInput = document.createElement("input");
   titleInput.type = "text";
+  titleInput.id = "title";
   titleInput.name = "project title";
   titleInput.placeholder = "Project title";
   titleDiv.append(titleLabel, titleInput);
@@ -140,6 +141,7 @@ function loadModalForm() {
   technologiesLabel.textContent = "Technologies";
   const technologiesInput = document.createElement("input");
   technologiesInput.type = "text";
+  technologiesInput.id = "techonologies";
   technologiesInput.name = "techonologies";
   technologiesInput.placeholder = "html, css, javascript";
   technologiesDiv.append(technologiesLabel, technologiesInput);
@@ -174,58 +176,34 @@ function loadModalForm() {
     const technologies = technologiesInput.value;
     const technologiesLength = technologies.length;
     const technologiesList = technologies.split(",");
+    titleInput.addEventListener("input", () => {
+      checkForErrors(titleInput.id);
+    });
+    technologiesInput.addEventListener("input", () => {
+      checkForErrors(technologiesInput.id);
+    });
 
     if (titleLength < 3 || titleLength > 30 || technologiesLength < 1) {
-      if (titleLength < 3) {
-        const titleError = document.createElement("p");
-        titleError.classList.add("error");
-        titleError.textContent =
-          "The title must be at least 3 characters long.";
-        titleInput.style.borderColor = "#AF0808";
-        titleDiv.appendChild(titleError);
-        titleInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2 && event.target.value.length < 31) {
-            resetInputState(titleInput, titleDiv);
-          }
-        });
-      }
-      if (titleLength > 30) {
-        const titleError = document.createElement("p");
-        titleError.classList.add("error");
-        titleError.textContent = "The title must not exceed 30 characters.";
-        titleInput.style.borderColor = "#AF0808";
-        titleDiv.appendChild(titleError);
-        titleInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2 && event.target.value.length < 31) {
-            resetInputState(titleInput, titleDiv);
-          }
-        });
+      if (titleLength < 3 || titleLength > 30) {
+        addError(titleInput.id);
       }
       if (technologiesLength < 1) {
-        const technologiesError = document.createElement("p");
-        technologiesError.classList.add("error");
-        technologiesError.textContent = "Please add some technologies.";
-        technologiesInput.style.borderColor = "#AF0808";
-        technologiesDiv.appendChild(technologiesError);
-        technologiesInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 0) {
-            resetInputState(technologiesInput, technologiesDiv);
-          }
-        });
+        addError(technologiesInput.id);
       }
     } else {
       const newProject = {
         title: title,
         technologies: technologiesList,
       };
-
       data.main.projects.push(newProject);
-      mainContainer.innerHTML = "";
+
       modal.remove();
       removeBlur();
+      mainContainer.innerHTML = "";
       loadProjects();
     }
   });
+
   closeModal.addEventListener("click", () => {
     modal.remove();
     removeBlur();
@@ -302,6 +280,129 @@ function loadProject(project, container, button) {
   container.appendChild(div);
 }
 
+function checkForErrors(inputId) {
+  const input = document.getElementById(inputId);
+  const inputLength = input.value.length;
+  const inputDiv = input.parentNode;
+  const error = document.createElement("p");
+  const emailPattern = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+  let isError = inputDiv.querySelector(".error");
+  error.classList.add("error");
+  input.style.borderColor = "#AF0808";
+
+  switch (inputId) {
+    case "name":
+      if (inputLength < 3) {
+        error.textContent = "The name must be at least 3 characters long.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else if (inputLength > 20) {
+        error.textContent = "The name must not exceed 20 characters.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else {
+        resetInputState(input, inputDiv);
+      }
+      break;
+    case "email":
+      if (!emailPattern.test(input.value)) {
+        error.textContent = "Please enter a valid email address.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else {
+        resetInputState(input, inputDiv);
+      }
+      break;
+    case "message":
+      if (inputLength < 1) {
+        error.textContent = "The message cannot be empty.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else if (inputLength > 100) {
+        error.textContent = "The message must not exceed 100 characters.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else {
+        resetInputState(input, inputDiv);
+      }
+      break;
+    case "title":
+      if (inputLength < 3) {
+        error.textContent = "The title must be at least 3 characters long.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else if (inputLength > 30) {
+        error.textContent = "The title must not exceed 30 characters.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else {
+        resetInputState(input, inputDiv);
+      }
+      break;
+    case "techonologies":
+      if (inputLength < 1) {
+        error.textContent = "Please add some technologies.";
+        if (!isError) {
+          inputDiv.appendChild(error);
+        }
+      } else {
+        resetInputState(input, inputDiv);
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
+function addError(inputId) {
+  const input = document.getElementById(inputId);
+  const inputLength = input.value.length;
+  const inputDiv = input.parentNode;
+  const error = document.createElement("p");
+  error.classList.add("error");
+  input.style.borderColor = "#AF0808";
+
+  switch (inputId) {
+    case "name":
+      if (inputLength < 3) {
+        error.textContent = "The name must be at least 3 characters long.";
+      } else if (inputLength > 20) {
+        error.textContent = "The name must not exceed 20 characters.";
+      }
+      break;
+    case "email":
+      error.textContent = "Please enter a valid email address.";
+      break;
+    case "message":
+      if (inputLength < 1) {
+        error.textContent = "The message cannot be empty.";
+      } else if (inputLength > 100) {
+        error.textContent = "The message must not exceed 100 characters.";
+      }
+      break;
+    case "title":
+      if (inputLength < 3) {
+        error.textContent = "The title must be at least 3 characters long.";
+      } else if (inputLength > 30) {
+        error.textContent = "The title must not exceed 30 characters.";
+      }
+      break;
+    case "techonologies":
+      if (inputLength < 1) {
+        error.textContent = "Please add some technologies.";
+      }
+  }
+  inputDiv.appendChild(error);
+}
+
 function loadContactMe() {
   mainContainer.innerHTML = "";
   const formContainer = document.createElement("div");
@@ -323,7 +424,6 @@ function loadContactMe() {
   nameInput.id = "name";
   nameInput.name = "name";
   nameInput.placeholder = "Your name";
-  nameInput.required = true;
   const emailLabel = document.createElement("label");
   emailLabel.textContent = "Email";
   const emailInput = document.createElement("input");
@@ -331,7 +431,6 @@ function loadContactMe() {
   emailInput.id = "email";
   emailInput.name = "email";
   emailInput.placeholder = "email@example.com";
-  emailInput.required = true;
   const msgLabel = document.createElement("label");
   msgLabel.textContent = "Message";
   const msgInput = document.createElement("input");
@@ -339,7 +438,6 @@ function loadContactMe() {
   msgInput.id = "message";
   msgInput.name = "message";
   msgInput.placeholder = "Hello, my name is . . .";
-  msgInput.required = true;
   const submitButton = document.createElement("button");
   submitButton.classList = "buttons";
   submitButton.type = "submit";
@@ -363,73 +461,25 @@ function loadContactMe() {
     const name = nameInput.value.length;
     const email = emailPattern.test(emailInput.value);
     const msg = msgInput.value.length;
+    nameInput.addEventListener("input", () => {
+      checkForErrors(nameInput.id);
+    });
+    emailInput.addEventListener("input", () => {
+      checkForErrors(emailInput.id);
+    });
+    msgInput.addEventListener("input", () => {
+      checkForErrors(msgInput.id);
+    });
 
-    if (name < 3 || name > 20 || msg === 0 || msg > 200 || !email) {
-      if (name < 3) {
-        const nameError = document.createElement("p");
-        nameError.classList.add("error");
-        nameError.textContent = "The name must be at least 3 characters long.";
-        nameInput.style.borderColor = "#AF0808";
-        nameDiv.appendChild(nameError);
-        nameInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2 && event.target.value.length < 21) {
-            resetInputState(nameInput, nameDiv);
-          }
-        });
-      }
-      if (name > 20) {
-        const nameError = document.createElement("p");
-        nameError.classList.add("error");
-        nameError.textContent = "The name must not exceed 20 characters.";
-        nameInput.style.borderColor = "#AF0808";
-        nameDiv.appendChild(nameError);
-        nameInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2 && event.target.value.length < 21) {
-            resetInputState(nameInput, nameDiv);
-          }
-        });
-      }
-      if (msg === 0) {
-        const msgError = document.createElement("p");
-        msgError.classList.add("error");
-        msgError.textContent = "The message cannot be empty.";
-        msgInput.style.borderColor = "#AF0808";
-        messageDiv.appendChild(msgError);
-        emailInput.addEventListener("input", (event) => {
-          if (
-            event.target.value.length > 0 &&
-            event.target.value.length < 201
-          ) {
-            resetInputState(emailInput, emailDiv);
-          }
-        });
-      }
-      if (msg > 200) {
-        const msgError = document.createElement("p");
-        msgError.classList.add("error");
-        msgError.textContent = "The message must not exceed 100 characters.";
-        msgInput.style.borderColor = "#AF0808";
-        messageDiv.appendChild(msgError);
-        emailInput.addEventListener("input", (event) => {
-          if (
-            event.target.value.length > 0 &&
-            event.target.value.length < 201
-          ) {
-            resetInputState(emailInput, emailDiv);
-          }
-        });
+    if (name < 3 || name > 20 || !email || msg < 1 || msg > 100) {
+      if (name < 3 || name > 20) {
+        addError(nameInput.id);
       }
       if (!email) {
-        const emailError = document.createElement("p");
-        emailError.classList.add("error");
-        emailError.textContent = "Please enter a valid email address.";
-        emailInput.style.borderColor = "#AF0808";
-        emailDiv.appendChild(emailError);
-        msgInput.addEventListener("input", (event) => {
-          if (emailPattern.test(event.target.value)) {
-            resetInputState(msgInput, messageDiv);
-          }
-        });
+        addError(emailInput.id);
+      }
+      if (msg < 1 || msg > 100) {
+        addError(msgInput.id);
       }
     } else {
       const name = nameInput.value;
