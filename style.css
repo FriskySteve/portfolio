@@ -1,6 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Gothic&family=League+Spartan:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Gothic&family=League+Spartan:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@font-face {
+  font-family: "Roboto";
+  src: url(fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: "LeagueGothic";
+  src: url(fonts/LeagueGothic-Regular.ttf);
+}
+@font-face {
+  font-family: "LeagueSpartan";
+  src: url(fonts/LeagueSpartan-Regular.ttf);
+}
 :root {
   --header-footer-background-color: #1f2041;
   --main-background-color: #f9f9f9;
@@ -9,12 +18,12 @@
   --silver-color: #adb6c4;
 }
 * {
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 header {
   background-color: var(--header-footer-background-color);
   color: var(--white-color);
-  padding: 37px 120px 0px;
+  padding: clamp(10px, 10vw, 37px) clamp(10px, 10vw, 120px);
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -57,6 +66,7 @@ header h1 {
   color: var(--white-color);
   justify-self: center;
   margin: 0px 0px 4px;
+  text-align: center;
 }
 header p {
   font-family: League Spartan;
@@ -192,8 +202,8 @@ pre {
   flex-direction: row;
   row-gap: 84px;
   column-gap: 41px;
-  /* gap: 41px; */
   align-self: center;
+  justify-content: center;
 }
 #projects {
   display: flex;
@@ -273,6 +283,7 @@ pre {
   gap: 65px;
   flex-direction: column;
   margin: 84px 0;
+  padding: 0 10px;
 }
 .h1-pre {
   margin-top: 0;
@@ -284,7 +295,7 @@ pre {
 #messages-contener {
   display: flex;
   flex-direction: column;
-  margin: 65px 120px;
+  margin: clamp(84px, 10vh, 65px) clamp(10px, 6vw, 120px);
   gap: 65px;
 }
 #messages-contener * {
@@ -319,8 +330,6 @@ pre {
 }
 #name-div,
 #email-div {
-  /* display: flex;
-  flex-direction: column; */
   width: 100%;
 }
 #message-div {
@@ -365,6 +374,7 @@ main label {
 .modal div {
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
 }
 .modal input {
   border-top: none;
@@ -412,15 +422,14 @@ main label {
   justify-content: center;
   align-self: center;
   justify-self: center;
-  margin-top: 84px;
+  margin: 84px 0;
 }
 #carousel-container {
   display: flex;
   gap: 41px;
-  align-content: center;
-  justify-content: center;
-  align-self: center;
-  justify-self: center;
+  margin: 0 clamp(10px, 100%, 139px);
+  max-width: -webkit-fill-available;
+  align-items: center;
 }
 .error {
   color: #af0808;
@@ -461,4 +470,62 @@ main label {
 }
 .skill-exp {
   color: var(--silver-color);
+}
+#hamburger-container {
+  display: none;
+}
+@media (width<768px) {
+  #hamburger-container {
+    display: block;
+  }
+  #header-links {
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 90px;
+    right: 0;
+    padding: 28px 0 28px 37px;
+    border: 1px solid var(--main-background-color);
+    border-left: none;
+    border-right: none;
+    background-color: var(--header-footer-background-color);
+    width: 100%;
+  }
+  #footer-links {
+    display: none;
+  }
+  header {
+    padding: 10px 16px 0;
+  }
+  footer {
+    padding: 60px 18px;
+    height: auto;
+  }
+  #footer-container {
+    justify-content: center;
+  }
+  #logo-to-hide {
+    display: none;
+  }
+  #home-container {
+    padding: 0 16px;
+  }
+  .modal {
+    padding: 40px 0;
+  }
+  #contact-form {
+    margin: 84px 10px;
+  }
+  #skills-container {
+    justify-content: center;
+  }
+  #projects-container {
+    gap: 41px;
+  }
+  #carousel-container {
+    flex-direction: column;
+  }
+  .carousel-buttons {
+    transform: rotate(90deg);
+  }
 }

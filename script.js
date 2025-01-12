@@ -184,7 +184,7 @@ function loadModalForm() {
         titleInput.style.borderColor = "#AF0808";
         titleDiv.appendChild(titleError);
         titleInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2) {
+          if (event.target.value.length > 2 && event.target.value.length < 31) {
             resetInputState(titleInput, titleDiv);
           }
         });
@@ -196,7 +196,7 @@ function loadModalForm() {
         titleInput.style.borderColor = "#AF0808";
         titleDiv.appendChild(titleError);
         titleInput.addEventListener("input", (event) => {
-          if (event.target.value.length <= 30) {
+          if (event.target.value.length > 2 && event.target.value.length < 31) {
             resetInputState(titleInput, titleDiv);
           }
         });
@@ -372,7 +372,7 @@ function loadContactMe() {
         nameInput.style.borderColor = "#AF0808";
         nameDiv.appendChild(nameError);
         nameInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 2) {
+          if (event.target.value.length > 2 && event.target.value.length < 21) {
             resetInputState(nameInput, nameDiv);
           }
         });
@@ -384,7 +384,7 @@ function loadContactMe() {
         nameInput.style.borderColor = "#AF0808";
         nameDiv.appendChild(nameError);
         nameInput.addEventListener("input", (event) => {
-          if (event.target.value.length <= 20) {
+          if (event.target.value.length > 2 && event.target.value.length < 21) {
             resetInputState(nameInput, nameDiv);
           }
         });
@@ -396,7 +396,10 @@ function loadContactMe() {
         msgInput.style.borderColor = "#AF0808";
         messageDiv.appendChild(msgError);
         emailInput.addEventListener("input", (event) => {
-          if (event.target.value.length > 0) {
+          if (
+            event.target.value.length > 0 &&
+            event.target.value.length < 201
+          ) {
             resetInputState(emailInput, emailDiv);
           }
         });
@@ -408,7 +411,10 @@ function loadContactMe() {
         msgInput.style.borderColor = "#AF0808";
         messageDiv.appendChild(msgError);
         emailInput.addEventListener("input", (event) => {
-          if (event.target.value.length <= 200) {
+          if (
+            event.target.value.length > 0 &&
+            event.target.value.length < 201
+          ) {
             resetInputState(emailInput, emailDiv);
           }
         });
@@ -517,15 +523,25 @@ function loadHome() {
   mySkillsHeader.textContent = data.main.home.title2;
   const mySkills = document.createElement("div");
   const homeDescContainer = document.createElement("div");
-  const carousel = loadCarousel();
-
+  const hamburgerMenu = document.getElementById("hamburger-container");
+  const hamburgerLinks = document.getElementById("header-links");
+  const hamburgerIcon = document.getElementById("hamburger-icon");
   homeDescContainer.append(aboutMe, aboutMeP, mySkillsHeader);
   homeContainer.append(imgDiv, homeDescContainer, mySkills);
   mainContainer.appendChild(homeContainer);
   loadSkills(homeContainer);
-  // if (data.main.projects.length > 0) {
-  //   loadCarousel();
-  // }
+  if (data.main.projects.length > 0) {
+    loadCarousel();
+  }
+  hamburgerMenu.addEventListener("click", () => {
+    if (hamburgerLinks.style.display != "flex") {
+      hamburgerLinks.style.display = "flex";
+      hamburgerIcon.src = "img/hamburger-gold.png";
+    } else {
+      hamburgerLinks.style.display = "none";
+      hamburgerIcon.src = "img/hamburger-white.png";
+    }
+  });
 }
 
 function loadCarousel() {
@@ -541,7 +557,7 @@ function loadCarousel() {
     }
     loadProject(data.main.projects.at(i), carouselContainer, false);
   }
-  // mainContainer.appendChild(carouselContainer);
+  mainContainer.appendChild(carouselContainer);
   if (data.main.projects.length > 3) {
     const carouselButtonsContainer = document.createElement("div");
     carouselButtonsContainer.id = "carousel-buttons-container";
